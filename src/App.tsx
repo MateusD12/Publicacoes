@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Publish from "./pages/Publish";
 import Schedule from "./pages/Schedule";
 import Settings from "./pages/Settings";
+import PwaInstallPopup from "./components/PwaInstallPopup";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
+      <PwaInstallPopup />
     </Router>
   );
 }
