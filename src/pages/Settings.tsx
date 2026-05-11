@@ -1,4 +1,8 @@
+import { useGoogleOAuth } from '../hooks/social/useGoogleOAuth';
+
 export default function Settings() {
+  const { connectYouTube } = useGoogleOAuth();
+
   return (
     <div className="space-y-6">
       <div>
@@ -17,7 +21,10 @@ export default function Settings() {
                 <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold">YT</div>
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">YouTube</span>
               </div>
-              <button className="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <button 
+                onClick={connectYouTube}
+                className="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
                 Conectar
               </button>
             </div>
