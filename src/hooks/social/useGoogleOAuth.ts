@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { supabase } from '../../integrations/supabase/client';
+import { supabase } from '../../lib/supabase';
 
 export const useGoogleOAuth = () => {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
