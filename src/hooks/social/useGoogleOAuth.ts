@@ -3,11 +3,17 @@ import { supabase } from '../../lib/supabase';
 
 export const useGoogleOAuth = () => {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const rawSupabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseUrl = rawSupabaseUrl && rawSupabaseUrl !== 'YOUR_SUPABASE_URL_HERE' ? rawSupabaseUrl : 'https://placeholder.supabase.co';
   const redirectUri = `${supabaseUrl}/functions/v1/social_oauth_callback`;
 
   const connectYouTube = useCallback(async () => {
     try {
+      if (!rawSupabaseUrl || rawSupabaseUrl === 'YOUR_SUPABASE_URL_HERE') {
+        alert("Por favor, configure o VITE_SUPABASE_URL no arquivo .env.local primeiro.");
+        return;
+      }
+
       // 1. Get the current user from Supabase to link the account
       const { data: { session } } = await supabase.auth.getSession();
       
