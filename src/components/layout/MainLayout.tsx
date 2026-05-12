@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Send, CalendarDays, Settings } from "lucide-react";
+import { LayoutDashboard, Send, CalendarDays, Settings, LogOut } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { supabase } from "../../lib/supabase";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -11,6 +12,10 @@ const navigation = [
 
 export function MainLayout() {
   const location = useLocation();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
 
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
@@ -39,6 +44,15 @@ export function MainLayout() {
             );
           })}
         </nav>
+        <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700">
+          <button
+            onClick={handleLogout}
+            className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors w-full"
+          >
+            <LogOut className="mr-3 h-5 w-5" aria-hidden="true" />
+            Sair
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
