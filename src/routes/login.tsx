@@ -42,7 +42,17 @@ function LoginPage() {
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/dashboard`,
-          scopes: 'email profile',
+          scopes: [
+            'email',
+            'profile',
+            'https://www.googleapis.com/auth/youtube.upload',
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/yt-analytics.readonly',
+          ].join(' '),
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       })
       if (error) throw error

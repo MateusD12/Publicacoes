@@ -3,12 +3,15 @@ import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
 import { formatRelative, PLATFORM_LABEL, PLATFORM_COLOR, STATUS_LABEL, STATUS_COLOR } from '@/lib/utils'
 import type { PostWithResults, SocialAccount } from '@/lib/types'
+import { useYouTubeAutoConnect } from '@/hooks/useYouTubeAutoConnect'
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardPage,
 })
 
 function DashboardPage() {
+  useYouTubeAutoConnect()
+
   const { data: posts = [] } = useQuery<PostWithResults[]>({
     queryKey: ['posts', 'dashboard'],
     queryFn: async () => {
